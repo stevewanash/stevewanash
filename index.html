@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueLook AI - AI-Powered Product Photography</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap">
+    <link rel="icon" href="Resources/Home/a-minimalist-logo-design-featuring-the-t_FfzJEYC5RG-KFLqgjKJflw_Jrwnsze-QoWTQjQHbZVx8Q.png">
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-gradient-start: #FF6B6B; /* Vibrant Pink */
+            --primary-gradient-end: #FFA500;   /* Vibrant Orange */
+            --accent-blue: #0A7AFF; /* Cool Blue - slightly brighter for modern feel */
+            --text-dark: #212529; /* Bootstrap's dark text color for good contrast */
+            --text-light: #FFFFFF;
+            --background-light: #FFFFFF;
+            --background-offwhite: #F8F9FA; /* Bootstrap's light gray */
+            --border-light: #DEE2E6; /* Bootstrap's border color */
+            --font-primary: 'Montserrat', sans-serif;
+            --rounded-corners: 8px; /* Slightly more rounded */
+            --section-padding: 50px 0; /* Adjusted padding */
+            --container-max-width: 1140px; /* Common container width */
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.07);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.7; /* Increased for readability */
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 0.75rem; /* Consistent bottom margin */
+            line-height: 1.3;
+        }
+
+        h1 { font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 800;} /* Responsive font size */
+        h2 { font-size: clamp(1.8rem, 4vw, 2.2rem); }
+        h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+        }
+
+        a:hover {
+            color: #0056b3; /* Darken accent blue on hover */
+            opacity: 0.85;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--rounded-corners); /* Default rounded corners for images */
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--background-light);
+            padding: 15px 0;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #logo {
+            height: 40px; /* Adjusted logo height */
+            width: auto;
+            border-radius: 0; /* Logo might not need rounding */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 30px; /* Increased spacing */
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem; /* Slightly adjusted font size */
+            padding-bottom: 5px; /* Space for border */
+            border-bottom: 2px solid transparent; /* Prepare for active state */
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        #mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Adjusted size */
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+
+        /* --- Hero Section (Home Page) --- */
+        .hero {
+            background-image: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--text-light);
+            padding: clamp(60px, 15vh, 120px) 0; /* Responsive padding */
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero .container {
+            max-width: 800px;
+        }
+        .hero h1 {
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.15rem); /* Responsive font size */
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        .hero .selling-points {
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .hero .selling-points span {
+            margin: 0 8px;
+            display: inline-block;
+        }
+
+
+        /* --- Image Comparison Slider Section (Home Page) --- */
+        .image-comparison-slider-section {
+            padding: var(--section-padding);
+            text-align: center;
+            background-color: var(--background-offwhite);
+        }
+        .image-comparison-slider-section h2 {
+            margin-bottom: 40px; /* Increased margin */
+        }
+        .slider-container {
+            max-width: 100%; /* Increased max-width */
+            margin: 0 auto 60px auto; /* Increased bottom margin for spacing between sliders */
+            border-radius: var(--rounded-corners);
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            /* Add a min-height to prevent collapse if images are slow to load or missing */
+            min-height: 200px; 
+            background-color: #eee; /* Placeholder background for the slider area */
+        }
+        .slider-container:last-child {
+            margin-bottom: 40px; /* Less margin for the last slider before the CTA button */
+        }
+        .slider-container img {
+            /* Explicitly set display block for images inside slider, though TwentyTwenty might override */
+            width: 100%;
+            display: block;
+            height: auto;
+            object-fit: cover;
+        }
+
+
+        /* --- Key Benefits Section (Home Page) --- */
+        .key-benefits {
+            padding: var(--section-padding);
+            text-align: center;
+        }
+        .key-benefits h2 {
+            margin-bottom: 50px; /* Increased margin */
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Responsive columns */
+            gap: 30px;
+            text-align: left;
+        }
+        .benefit-item {
+            background-color: var(--background-light);
+            padding: 30px; /* Increased padding */
+            border-radius: var(--rounded-corners);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .benefit-item .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            text-align: center; /* Center icon */
+        }
+        .benefit-item h3 {
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            text-align: center; /* Center heading */
+        }
+        .benefit-item p {
+            font-size: 0.95rem;
+            text-align: center; /* Center paragraph */
+        }
+
+        /* --- CTA Button --- */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--text-light);
+            padding: 14px 35px; /* Increased padding */
+            border-radius: var(--rounded-corners);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,123,255,0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3; /* Darken accent blue */
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,123,255,0.4);
+        }
+
+
+        /* --- Page Title Section (Generic for Gallery, Contact) --- */
+        .page-title-section {
+            background-color: var(--background-offwhite);
+            padding: clamp(30px, 8vh, 60px) 0; /* Responsive padding */
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .page-title-section h1 {
+            color: var(--text-dark);
+        }
+        .page-title-section p {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            color: #55575a; /* Slightly darker grey */
+            max-width: 650px; /* Increased max-width */
+            margin: 10px auto 0 auto;
+        }
+
+        /* --- Gallery Page --- */
+        .gallery-grid-section {
+            padding: var(--section-padding);
+        }
+        .gallery-grid {
+            display: grid;
+            /* Minimum item width 280px, fill available space, max 4 columns */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px;
+        }
+        .gallery-item {
+            border-radius: var(--rounded-corners);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            background-color: var(--background-offwhite); /* Placeholder bg */
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px) scale(1.02); /* More noticeable hover */
+            box-shadow: var(--shadow-medium);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover; /* Ensure images cover the area */
+            border-bottom: 1px solid var(--border-light); /* if caption is outside */
+        }
+        .gallery-item .caption {
+            padding: 15px; /* Increased padding */
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+        .gallery-cta {
+            text-align: center;
+            margin-top: 50px; /* Increased margin */
+        }
+
+
+        /* --- Contact Page --- */
+        .contact-section {
+            padding: var(--section-padding);
+        }
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 40px;
+        }
+        .contact-form-container, .contact-details-container {
+            flex: 1;
+            min-width: 300px; /* Ensure readability on smaller flex items */
+            padding: 25px;
+            background-color: var(--background-light);
+            border-radius: var(--rounded-corners);
+            box-shadow: var(--shadow-soft);
+        }
+        .contact-form-container h2, .contact-details-container h2 {
+            margin-bottom: 25px; /* Increased margin */
+            color: var(--accent-blue);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px; /* Increased margin */
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px; /* Adjusted padding */
+            border: 1px solid var(--border-light);
+            border-radius: var(--rounded-corners);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15); /* Softer focus shadow */
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px; /* Increased min-height */
+        }
+        .contact-details-container p {
+            margin-bottom: 12px; /* Increased margin */
+            font-size: 1rem;
+        }
+        .contact-details-container p strong {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .social-links {
+            margin-top: 30px; /* Increased margin */
+        }
+        .social-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px; /* Increased margin */
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.3rem; /* Larger icons/links */
+            color: var(--accent-blue);
+        }
+        .social-links a:hover {
+            color: #0056b3; /* Darken accent blue */
+        }
+        /* Basic Message Box for Form Submission */
+        .message-box {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: var(--rounded-corners);
+            text-align: center;
+            font-weight: 500;
+        }
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--text-dark);
+            color: #adb5bd; /* Lighter gray for footer text */
+            text-align: center;
+            padding: 30px 0; /* Increased padding */
+            font-size: 0.9rem;
+        }
+        footer p {
+            margin: 0;
+        }
+
+
+        /* --- TwentyTwenty Plugin Styles (Integrated for this example) --- */
+        .twentytwenty-container {
+            box-sizing: content-box;
+            z-index: 0;
+            overflow: hidden;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+        .twentytwenty-container img {
+            max-width: 100%; /* This is important, but TwentyTwenty might set it to 'none' */
+            position: absolute;
+            top: 0;
+            left: 0; 
+            display: block;
+            z-index: 20; /* Ensure images are below handle but above container bg */
+            border-radius: 0; 
+        }
+        .twentytwenty-container .twentytwenty-overlay {
+            z-index: 25;
+            background: rgba(0,0,0,0.0); 
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .twentytwenty-container .twentytwenty-overlay:hover {
+            background: rgba(0,0,0,0.2); 
+        }
+        .twentytwenty-container .twentytwenty-before-label,
+        .twentytwenty-container .twentytwenty-after-label {
+            position: absolute;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.8);
+            color: var(--text-dark);
+            padding: 5px 10px;
+            border-radius: 3px;
+            z-index: 30;
+            top: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .twentytwenty-container .twentytwenty-before-label { left: 10px; }
+        .twentytwenty-container .twentytwenty-after-label { right: 10px; }
+
+        .twentytwenty-handle {
+            height: 2.8rem; 
+            width: 2.8rem;
+            position: absolute;
+            left: 50%; 
+            top: 50%;
+            margin-left: -1.4rem; 
+            margin-top: -1.4rem; 
+            border: 3px solid var(--text-light);
+            border-radius: 50%;
+            box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+            z-index: 40; /* Handle must be on top */
+            cursor: col-resize; 
+            background-color: var(--accent-blue); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Custom arrows inside handle */
+        .twentytwenty-left-arrow, .twentytwenty-right-arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            position: absolute;
+        }
+        .twentytwenty-left-arrow {
+            border-width: 6px 8px 6px 0; 
+            border-color: transparent var(--text-light) transparent transparent;
+            left: 0.5rem; 
+        }
+        .twentytwenty-right-arrow {
+            border-width: 6px 0 6px 8px;
+            border-color: transparent transparent transparent var(--text-light);
+            right: 0.5rem;
+        }
+        .twentytwenty-horizontal .twentytwenty-handle:before { /* The line */
+            content: " ";
+            display: block;
+            background: var(--text-light);
+            position: absolute;
+            z-index: 30; /* Line below handle but above images */
+            box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.2);
+            width: 3px; 
+            height: 100%; /* Cover full height of the container */
+            left: 50%;
+            top: 0;
+            margin-left: -1.5px; 
+        }
+        /* Vertical Slider Specifics (if used) */
+        .twentytwenty-vertical .twentytwenty-handle { cursor: row-resize; }
+        .twentytwenty-vertical .twentytwenty-handle:before {
+            width: 100%; height: 3px; left: 0; top: 50%; margin-left:0; margin-top: -1.5px;
+        }
+        .twentytwenty-up-arrow { border-width: 0 6px 8px 6px; border-color: transparent transparent var(--text-light) transparent; top: 0.5rem; }
+        .twentytwenty-down-arrow { border-width: 8px 6px 0 6px; border-color: var(--text-light) transparent transparent transparent; bottom: 0.5rem; }
+
+
+        /* --- Lightbox for Gallery --- */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+        }
+        .lightbox-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+        .lightbox-content {
+            position: relative;
+            background-color: var(--background-light);
+            padding: 20px;
+            border-radius: var(--rounded-corners);
+            max-width: 90%;
+            max-height: 90vh;
+            box-shadow: var(--shadow-medium);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .lightbox-overlay.visible .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: calc(90vh - 100px); 
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        .lightbox-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -15px; 
+            right: -15px;
+            background-color: var(--accent-blue);
+            color: white;
+            border: 2px solid white; 
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 22px;
+            line-height: 31px; 
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .lightbox-close:hover {
+            background-color: #0056b3; 
+            transform: scale(1.1);
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) { /* Tablets and larger phones */
+            .benefits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) { /* Small tablets and mobile */
+            :root { --section-padding: 40px 0; }
+            h1 { font-size: clamp(2rem, 6vw, 2.5rem); }
+            .hero h1 { font-size: clamp(2.2rem, 7vw, 2.8rem); }
+            h2 { font-size: clamp(1.6rem, 5vw, 2rem); }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--background-light);
+                position: absolute;
+                top: 69px; /* Header height - adjust if header padding changes */
+                left: 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 10px 0;
+                border-top: 1px solid var(--border-light);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+                width: 100%;
+            }
+            nav ul li a {
+                display: block;
+                padding: 12px 20px; /* Larger tap targets */
+                border-bottom: none; /* Remove bottom border for mobile */
+            }
+            nav ul li a:hover, nav ul li a.active {
+                background-color: var(--background-offwhite); /* Highlight active/hover link */
+                color: var(--accent-blue);
+                border-bottom: none;
+            }
+            #mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: clamp(50px, 12vh, 100px) 0;
+                min-height: 50vh;
+            }
+            .hero p {
+                 font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr; /* Stack benefits */
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .contact-form-container, .contact-details-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) { /* Small mobile devices */
+            :root { --section-padding: 30px 0; }
+            h1 { font-size: clamp(1.7rem, 7vw, 2rem); }
+            .hero h1 { font-size: clamp(1.8rem, 8vw, 2.2rem); }
+            h2 { font-size: clamp(1.4rem, 6vw, 1.7rem); }
+            .container {
+                width: 95%;
+            }
+            .cta-button {
+                padding: 12px 25px; /* Adjust button padding */
+                font-size: 0.95rem;
+                width: 100%; /* Full width buttons on small screens */
+                text-align: center;
+            }
+            .image-comparison-slider-section .cta-button {
+                width: auto; /* Keep gallery button on home page not full width */
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr; /* Single column gallery */
+            }
+            .gallery-item img {
+                height: 220px; /* Slightly taller for single column */
+            }
+            .hero .selling-points span {
+                margin: 0 5px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#home" class="logo-link page-link" data-page="home">
+                <img src="Resources/Home/logo/looklogo.png" alt="TrueLook AI Logo" id="logo">
+            </a>
+            <nav>
+                <button id="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false">&#9776;</button>
+                <ul id="nav-links">
+                    </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="page-content">
+        </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> TrueLook AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="Resources/Home/jquery/jquery-3.7.1.js"></script>
+    <script src="Resources/Home/jquery/twentytwenty-master/js/jquery.event.move.js"></script>
+    <script src="Resources/Home/jquery/twentytwenty-master/js/jquery.twentytwenty.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        console.log("Document ready. Initializing scripts.");
+
+        // --- Page Content Templates ---
+        const pages = {
+            home: `
+                <section class="hero">
+                    <div class="container">
+                        <h1>AI-Powered Product Photography. Limitless Imagination.</h1>
+                        <p>TrueLook AI delivers stunning, hyper-realistic product images for skincare and consumer brands. Explore any setting – beach, forest, cityscape – with perfect product realism and visual consistency. Cost-effective. Creatively boundless.</p>
+                        <div class="selling-points">
+                            <span>Cost-Effective</span> &bull;
+                            <span>Visually Consistent</span> &bull;
+                            <span>Realistic Rendering</span> &bull;
+                            <span>Creative Flexibility</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="image-comparison-slider-section">
+                    <div class="container">
+                        <h2>See the TrueLook AI Difference</h2>
+                        <div class="twentytwenty-container slider-container" data-orientation="horizontal">
+                            <img src="Resources/Home/images/MOK_2078(1).jpg" alt="Before AI Enhancement">
+                            <img src="Resources/Home/images/BLHS.jpeg" alt="After AI Enhancement by TrueLook AI">
+                        </div>
+                        <div class="twentytwenty-container slider-container" data-orientation="horizontal">
+                            <img src="Resources/Home/images/MOK_2095.jpg" alt="Before AI Enhancement">
+                            <img src="Resources/Home/images/PPLRHSJ5.jpeg" alt="After AI Enhancement by TrueLook AI">
+                        </div>
+                        <a href="#gallery" class="cta-button page-link" data-page="gallery">View Our Gallery</a>
+                    </div>
+                </section>
+
+                <section class="key-benefits">
+                    <div class="container">
+                        <h2>Why Choose TrueLook AI?</h2>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">&#128176;</div>
+                                <h3>Cost-Effective Solution</h3>
+                                <p>Save significantly on traditional photography costs without compromising on quality.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">&#128204;</div>
+                                <h3>Unmatched Visual Consistency</h3>
+                                <p>Ensure all your product images maintain a cohesive look and feel, aligned with your brand.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">&#128065;</div>
+                                <h3>Hyper-Realistic Product Rendering</h3>
+                                <p>Our AI generates incredibly detailed and lifelike images, showcasing your products perfectly.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">&#127748;</div>
+                                <h3>Ultimate Creative Flexibility</h3>
+                                <p>Place your products in any imaginable scenario. The only limit is your imagination.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+            gallery: `
+                <section class="page-title-section">
+                    <div class="container">
+                        <h1>Explore Our AI-Generated Worlds</h1>
+                        <p>Witness the power of AI in crafting stunning product visuals for any scenario. Click on an image to see a larger view.</p>
+                    </div>
+                </section>
+                <section class="gallery-grid-section">
+                    <div class="container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/1.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/2.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/3.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/4.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/5.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/6.jpg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/7.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/8.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/9.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/10.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/11.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/12.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/13.jpeg">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="Resources/Gallery/14.jpeg">
+                            </div>
+                          
+                        </div>
+                        <div class="gallery-cta">
+                            <a href="#contact" class="cta-button page-link" data-page="contact">Ready to Transform Your Images?</a>
+                        </div>
+                    </div>
+                </section>
+            `,
+            contact: `
+                <section class="page-title-section">
+                    <div class="container">
+                        <h1>Let's Create Together</h1>
+                        <p>Reach out to discover how TrueLook AI can revolutionize your product photography.</p>
+                    </div>
+                </section>
+                <section class="contact-section">
+                    <div class="container">
+                        <div class="contact-details-container" style="max-width: 600px; margin: 0 auto;">
+                            <h2>Contact Details</h2>
+                            <p><strong>Email:</strong> <a href="mailto:truelookai@gmail.com">truelookai@gmail.com</a></p>
+                            <p><strong>Phone:</strong> +254111721222</p>
+                        </div>
+                    </div>
+                </section>
+            `
+        };
+
+        const navLinksContainer = $('#nav-links');
+        const pageContentContainer = $('#page-content');
+        const pageTitle = $('title');
+
+        // --- Navigation ---
+        const navItems = [
+            { id: 'home', text: 'Home', title: 'TrueLook AI - AI-Powered Product Photography' },
+            { id: 'gallery', text: 'Gallery', title: 'Gallery - TrueLook AI' },
+            { id: 'contact', text: 'Contact Us', title: 'Contact Us - TrueLook AI' }
+        ];
+
+        function updateNavigation(currentPageId) {
+            navLinksContainer.empty();
+            navItems.forEach(item => {
+                const activeClass = item.id === currentPageId ? 'active' : '';
+                navLinksContainer.append(`<li><a href="#${item.id}" class="page-link ${activeClass}" data-page="${item.id}">${item.text}</a></li>`);
+            });
+            console.log("Navigation updated for page:", currentPageId);
+        }
+
+        // --- Page Loading Logic ---
+        function loadPage(pageId) {
+            console.log("Attempting to load page:", pageId);
+            if (!pages[pageId]) {
+                console.log("Page ID not found, defaulting to home.");
+                pageId = 'home'; 
+            }
+
+            pageContentContainer.html(pages[pageId]);
+            const pageInfo = navItems.find(item => item.id === pageId);
+            if (pageInfo) {
+                pageTitle.text(pageInfo.title);
+            }
+            updateNavigation(pageId);
+            
+            // Update URL hash, but only if it's different, to avoid multiple history entries for the same page on initial load.
+            if(window.location.hash !== `#${pageId}`) {
+                window.location.hash = pageId;
+            }
+            window.scrollTo(0, 0); 
+
+            if (pageId === 'home') {
+                console.log("Home page loaded. Initializing TwentyTwenty sliders.");
+                // Initialize all slider containers
+                const $sliderContainers = $(".twentytwenty-container");
+                if ($sliderContainers.length) {
+                    $sliderContainers.each(function(index) {
+                        const $container = $(this);
+                        const $images = $container.find('img');
+                        let loadedImages = 0;
+                        
+                        $images.each(function() {
+                            if (this.complete) {
+                                loadedImages++;
+                                if (loadedImages === $images.length) {
+                                    initializeSlider($container);
+                                }
+                            } else {
+                                $(this).on('load', function() {
+                                    loadedImages++;
+                                    if (loadedImages === $images.length) {
+                                        initializeSlider($container);
+                                    }
+                                });
+                            }
+                        });
+                    });
+                } else {
+                    console.warn("No TwentyTwenty containers found on home page.");
+                }
+            }
+            attachDynamicEventListeners();
+            console.log("Page loaded and dynamic event listeners attached for:", pageId);
+        }
+
+        function initializeSlider($container) {
+            try {
+                $container.twentytwenty({
+                    default_offset_pct: 0.5,
+                    orientation: 'horizontal',
+                    before_label: 'Before',
+                    after_label: 'After',
+                    no_overlay: false,
+                    move_slider_on_hover: false,
+                    move_with_handle_only: true,
+                    click_to_move: false
+                });
+                // Add custom arrows to the handle
+                $container.find('.twentytwenty-handle').append('<span class="twentytwenty-left-arrow"></span><span class="twentytwenty-right-arrow"></span>');
+                console.log("TwentyTwenty slider initialized successfully.");
+            } catch (e) {
+                console.error("Error initializing TwentyTwenty slider:", e);
+            }
+        }
+
+        // --- Event Delegation for Page Links ---
+        // This handles clicks on nav links and any other .page-link elements
+        $(document).on('click', '.page-link', function(e) {
+            e.preventDefault();
+            const pageId = $(this).data('page') || $(this).attr('href').substring(1);
+            console.log(".page-link clicked, navigating to:", pageId);
+            loadPage(pageId);
+
+            if ($('#nav-links').hasClass('active')) {
+                $('#nav-links').removeClass('active');
+                $('#mobile-menu-toggle').html('&#9776;').attr('aria-expanded', 'false').attr('aria-label', 'Open navigation menu');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        $('#mobile-menu-toggle').on('click', function() {
+            console.log("Mobile menu toggle clicked.");
+            const nav = $('#nav-links');
+            nav.toggleClass('active');
+            if (nav.hasClass('active')) {
+                $(this).html('&times;').attr('aria-expanded', 'true').attr('aria-label', 'Close navigation menu'); 
+            } else {
+                $(this).html('&#9776;').attr('aria-expanded', 'false').attr('aria-label', 'Open navigation menu'); 
+            }
+        });
+
+        // --- Dynamic Event Listeners ---
+        function attachDynamicEventListeners() {
+            console.log("Attaching dynamic event listeners.");
+            // Contact Form Submission
+            $('#contactForm').off('submit').on('submit', function(event) {
+                event.preventDefault();
+                console.log("Contact form submitted.");
+                const formMessageBox = $('#form-message-box');
+                formMessageBox.text('Sending...').removeClass('success error').addClass('info').show();
+                setTimeout(() => {
+                    formMessageBox.text('Thank you for your message! We will get back to you soon.').removeClass('info error').addClass('success');
+                    $(this)[0].reset(); 
+                }, 1000);
+            });
+
+            // Gallery Lightbox
+            $('.gallery-item img').off('click').on('click', function() {
+                console.log("Gallery image clicked.");
+                const imgSrc = $(this).attr('src');
+                const imgAlt = $(this).attr('alt');
+                const captionText = $(this).siblings('.caption').text();
+                $('.lightbox-overlay').remove();
+                $('body').append(`
+                    <div class="lightbox-overlay">
+                        <div class="lightbox-content">
+                            <img src="${imgSrc}" alt="${imgAlt}">
+                            ${captionText ? `<div class="lightbox-caption">${captionText}</div>` : ''}
+                            <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+                        </div>
+                    </div>
+                `);
+                setTimeout(() => { $('.lightbox-overlay').addClass('visible'); }, 10);
+            });
+
+            // Lightbox close (delegated to body as lightbox is added dynamically)
+            $('body').off('click.lightbox').on('click.lightbox', '.lightbox-close, .lightbox-overlay', function(e) {
+                if (e.target === this || $(this).hasClass('lightbox-close')) {
+                    console.log("Closing lightbox.");
+                    $('.lightbox-overlay').removeClass('visible');
+                    setTimeout(() => { $('.lightbox-overlay').remove(); }, 300);
+                }
+            });
+            $('body').off('click.lightboxContent').on('click.lightboxContent', '.lightbox-content', function(e) {
+                e.stopPropagation();
+            });
+            $(document).off('keydown.lightbox').on('keydown.lightbox', function(e) {
+                if (e.key === "Escape" && $('.lightbox-overlay').hasClass('visible')) {
+                    console.log("Closing lightbox with Escape key.");
+                    $('.lightbox-overlay').removeClass('visible');
+                    setTimeout(() => { $('.lightbox-overlay').remove(); }, 300);
+                }
+            });
+        }
+
+        // --- Initial Page Load ---
+        const initialPage = window.location.hash ? window.location.hash.substring(1) : 'home';
+        console.log("Initial page from hash or default:", initialPage);
+        loadPage(initialPage);
+
+        // Handle browser back/forward navigation
+        $(window).on('hashchange', function() {
+            const newPageId = window.location.hash ? window.location.hash.substring(1) : 'home';
+            console.log("Hash changed to:", newPageId, "Loading page.");
+            loadPage(newPageId);
+        });
+
+        $('#current-year').text(new Date().getFullYear());
+        console.log("All scripts initialized.");
+    }); 
+    </script>
+</body>
+</html>
