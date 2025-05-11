@@ -195,9 +195,9 @@
             border-radius: var(--rounded-corners);
             box-shadow: var(--shadow-medium);
             overflow: hidden;
-            min-height: 400px; /* Increased minimum height */
+            min-height: 600px; /* Increased height */
             background-color: #eee;
-            position: relative; /* Added position relative */
+            position: relative;
         }
         .slider-container:last-child {
             margin-bottom: 40px; /* Less margin for the last slider before the CTA button */
@@ -452,7 +452,7 @@
             position: relative;
             -webkit-user-select: none;
             -moz-user-select: none;
-            height: 400px; /* Fixed height for the container */
+            height: 600px; /* Increased height */
         }
         .twentytwenty-container img {
             max-width: 100%;
@@ -462,8 +462,9 @@
             display: block;
             z-index: 20;
             border-radius: 0;
-            height: 100%; /* Make images fill the container height */
-            object-fit: cover; /* Ensure images cover the area properly */
+            height: 100%;
+            object-fit: contain; /* Changed from cover to contain to show full image */
+            background-color: #fff; /* Added background color for images */
         }
         .twentytwenty-container .twentytwenty-overlay {
             z-index: 25;
