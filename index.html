@@ -761,6 +761,61 @@
     $(document).ready(function() {
         console.log("Document ready. Initializing scripts.");
 
+        // Initialize TwentyTwenty sliders immediately
+        function initializeAllSliders() {
+            console.log("Initializing all sliders");
+            $(".twentytwenty-container").each(function() {
+                const $container = $(this);
+                const $images = $container.find('img');
+                let loadedImages = 0;
+                
+                $images.each(function() {
+                    if (this.complete) {
+                        loadedImages++;
+                        if (loadedImages === $images.length) {
+                            initializeSlider($container);
+                        }
+                    } else {
+                        $(this).on('load', function() {
+                            loadedImages++;
+                            if (loadedImages === $images.length) {
+                                initializeSlider($container);
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        function initializeSlider($container) {
+            try {
+                $container.twentytwenty({
+                    default_offset_pct: 0.5,
+                    orientation: 'horizontal',
+                    before_label: 'Before',
+                    after_label: 'After',
+                    no_overlay: false,
+                    move_slider_on_hover: false,
+                    move_with_handle_only: true,
+                    click_to_move: false
+                });
+                console.log("Slider initialized successfully");
+            } catch (e) {
+                console.error("Error initializing slider:", e);
+            }
+        }
+
+        // Initialize sliders on page load
+        initializeAllSliders();
+
+        // Re-initialize sliders when switching to home page
+        $(document).on('click', '.page-link', function(e) {
+            const pageId = $(this).data('page') || $(this).attr('href').substring(1);
+            if (pageId === 'home') {
+                setTimeout(initializeAllSliders, 100); // Small delay to ensure DOM is ready
+            }
+        });
+
         // --- Page Content Templates ---
         const pages = {
             home: `
@@ -781,12 +836,12 @@
                     <div class="container">
                         <h2>See the TrueLook AI Difference</h2>
                         <div class="twentytwenty-container slider-container" data-orientation="horizontal">
-                            <img src="Resources/Home/images/MOK_2078(1).JPG" alt="Before AI Enhancement">
-                            <img src="Resources/Home/images/BLHS.jpeg" alt="After AI Enhancement by TrueLook AI">
+                            <img src="./Resources/Home/images/MOK_2078(1).JPG" alt="Before AI Enhancement">
+                            <img src="./Resources/Home/images/BLHS.jpeg" alt="After AI Enhancement by TrueLook AI">
                         </div>
                         <div class="twentytwenty-container slider-container" data-orientation="horizontal">
-                            <img src="Resources/Home/images/MOK_2095.JPG" alt="Before AI Enhancement">
-                            <img src="Resources/Home/images/PPLRHSJ5.jpeg" alt="After AI Enhancement by TrueLook AI">
+                            <img src="./Resources/Home/images/MOK_2095.JPG" alt="Before AI Enhancement">
+                            <img src="./Resources/Home/images/PPLRHSJ5.jpeg" alt="After AI Enhancement by TrueLook AI">
                         </div>
                         <a href="#gallery" class="cta-button page-link" data-page="gallery">View Our Gallery</a>
                     </div>
@@ -972,26 +1027,6 @@
             }
             attachDynamicEventListeners();
             console.log("Page loaded and dynamic event listeners attached for:", pageId);
-        }
-
-        function initializeSlider($container) {
-            try {
-                $container.twentytwenty({
-                    default_offset_pct: 0.5,
-                    orientation: 'horizontal',
-                    before_label: 'Before',
-                    after_label: 'After',
-                    no_overlay: false,
-                    move_slider_on_hover: false,
-                    move_with_handle_only: true,
-                    click_to_move: false
-                });
-                // Add custom arrows to the handle
-                $container.find('.twentytwenty-handle').append('<span class="twentytwenty-left-arrow"></span><span class="twentytwenty-right-arrow"></span>');
-                console.log("TwentyTwenty slider initialized successfully.");
-            } catch (e) {
-                console.error("Error initializing TwentyTwenty slider:", e);
-            }
         }
 
         // --- Event Delegation for Page Links ---
