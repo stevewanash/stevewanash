@@ -190,14 +190,14 @@
             margin-bottom: 40px; /* Increased margin */
         }
         .slider-container {
-            max-width: 100%; /* Increased max-width */
-            margin: 0 auto 60px auto; /* Increased bottom margin for spacing between sliders */
+            max-width: 100%;
+            margin: 0 auto 60px auto;
             border-radius: var(--rounded-corners);
             box-shadow: var(--shadow-medium);
             overflow: hidden;
-            /* Add a min-height to prevent collapse if images are slow to load or missing */
-            min-height: 200px; 
-            background-color: #eee; /* Placeholder background for the slider area */
+            min-height: 400px; /* Increased minimum height */
+            background-color: #eee;
+            position: relative; /* Added position relative */
         }
         .slider-container:last-child {
             margin-bottom: 40px; /* Less margin for the last slider before the CTA button */
@@ -452,15 +452,18 @@
             position: relative;
             -webkit-user-select: none;
             -moz-user-select: none;
+            height: 400px; /* Fixed height for the container */
         }
         .twentytwenty-container img {
-            max-width: 100%; /* This is important, but TwentyTwenty might set it to 'none' */
+            max-width: 100%;
             position: absolute;
             top: 0;
-            left: 0; 
+            left: 0;
             display: block;
-            z-index: 20; /* Ensure images are below handle but above container bg */
-            border-radius: 0; 
+            z-index: 20;
+            border-radius: 0;
+            height: 100%; /* Make images fill the container height */
+            object-fit: cover; /* Ensure images cover the area properly */
         }
         .twentytwenty-container .twentytwenty-overlay {
             z-index: 25;
@@ -778,11 +781,11 @@
                     <div class="container">
                         <h2>See the TrueLook AI Difference</h2>
                         <div class="twentytwenty-container slider-container" data-orientation="horizontal">
-                            <img src="Resources/Home/images/MOK_2078(1).jpg" alt="Before AI Enhancement">
+                            <img src="Resources/Home/images/MOK_2078(1).JPG" alt="Before AI Enhancement">
                             <img src="Resources/Home/images/BLHS.jpeg" alt="After AI Enhancement by TrueLook AI">
                         </div>
                         <div class="twentytwenty-container slider-container" data-orientation="horizontal">
-                            <img src="Resources/Home/images/MOK_2095.jpg" alt="Before AI Enhancement">
+                            <img src="Resources/Home/images/MOK_2095.JPG" alt="Before AI Enhancement">
                             <img src="Resources/Home/images/PPLRHSJ5.jpeg" alt="After AI Enhancement by TrueLook AI">
                         </div>
                         <a href="#gallery" class="cta-button page-link" data-page="gallery">View Our Gallery</a>
