@@ -195,7 +195,7 @@
             border-radius: var(--rounded-corners);
             box-shadow: var(--shadow-medium);
             overflow: hidden;
-            min-height: 600px; /* Increased height */
+            min-height: 800px; /* Increased to match target height */
             background-color: #eee;
             position: relative;
         }
@@ -452,7 +452,7 @@
             position: relative;
             -webkit-user-select: none;
             -moz-user-select: none;
-            height: 600px; /* Increased height */
+            height: 800px; /* Increased to match target height */
         }
         .twentytwenty-container img {
             max-width: 100%;
@@ -463,8 +463,8 @@
             z-index: 20;
             border-radius: 0;
             height: 100%;
-            object-fit: contain; /* Changed from cover to contain to show full image */
-            background-color: #fff; /* Added background color for images */
+            object-fit: contain;
+            background-color: #fff;
         }
         .twentytwenty-container .twentytwenty-overlay {
             z-index: 25;
@@ -790,6 +790,21 @@
 
         function initializeSlider($container) {
             try {
+                // First, resize images to match dimensions
+                const $images = $container.find('img');
+                const targetHeight = 800; // Set a reasonable target height
+                
+                $images.each(function() {
+                    const img = this;
+                    if (img.complete) {
+                        resizeImage(img, targetHeight);
+                    } else {
+                        img.onload = function() {
+                            resizeImage(img, targetHeight);
+                        };
+                    }
+                });
+
                 $container.twentytwenty({
                     default_offset_pct: 0.5,
                     orientation: 'horizontal',
@@ -804,6 +819,22 @@
             } catch (e) {
                 console.error("Error initializing slider:", e);
             }
+        }
+
+        function resizeImage(img, targetHeight) {
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            const newWidth = targetHeight * aspectRatio;
+            
+            // Create a canvas to resize the image
+            const canvas = document.createElement('canvas');
+            canvas.width = newWidth;
+            canvas.height = targetHeight;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, newWidth, targetHeight);
+            
+            // Update the image source with the resized version
+            img.src = canvas.toDataURL('image/jpeg', 0.9);
         }
 
         // Initialize sliders on page load
